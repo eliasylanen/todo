@@ -2,7 +2,8 @@ module.exports = {
   "env": {
         "browser": true,
         "node": true,
-        "es6": true
+        "es6": true,
+        "mongo": true
     },
     "extends": "airbnb",
     "plugins": [
@@ -14,7 +15,6 @@ module.exports = {
         "react/require-extension": 0,
         "no-console": 0,
         "no-use-before-define": 0,
-        "no-plusplus": 0,
-        "eqeqeq": 0
+        "no-plusplus": 0
     }
 };

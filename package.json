@@ -1,83 +1,41 @@
 {
-  "jspm": {
-    "name": "app",
-    "main": "app.js",
-    "dependencies": {
-      "angular": "github:angular/bower-angular@^1.5.8",
-      "angular-route": "npm:angular-route@^1.5.8",
-      "express": "npm:express@^4.14.0"
-    },
-    "devDependencies": {
-      "module": "github:jspm/nodelibs-module@^0.2.0-alpha",
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.16"
-    },
-    "peerDependencies": {
-      "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
-      "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
-      "constants": "github:jspm/nodelibs-constants@^0.2.0-alpha",
-      "crypto": "github:jspm/nodelibs-crypto@^0.2.0-alpha",
-      "events": "github:jspm/nodelibs-events@^0.2.0-alpha",
-      "fs": "github:jspm/nodelibs-fs@^0.2.0-alpha",
-      "http": "github:jspm/nodelibs-http@^0.2.0-alpha",
-      "net": "github:jspm/nodelibs-net@^0.2.0-alpha",
-      "os": "github:jspm/nodelibs-os@^0.2.0-alpha",
-      "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
-      "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
-      "querystring": "github:jspm/nodelibs-querystring@^0.2.0-alpha",
-      "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
-      "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",
-      "url": "github:jspm/nodelibs-url@^0.2.0-alpha",
-      "util": "github:jspm/nodelibs-util@^0.2.0-alpha",
-      "vm": "github:jspm/nodelibs-vm@^0.2.0-alpha"
-    },
-    "overrides": {
-      "github:angular/bower-angular@1.5.8": {
-        "main": "angular",
-        "meta": {
-          "angular.js": {
-            "exports": "angular",
-            "format": "global"
-          }
-        }
-      },
-      "npm:debug@2.2.0": {
-        "main": "browser.js",
-        "jspmNodeConversion": false,
-        "format": "cjs",
-        "map": {
-          "./browser.js": {
-            "node": "./node.js"
-          },
-          "./node.js": {
-            "browser": "./browser.js"
-          },
-          "fs": "@node/fs",
-          "net": "@node/net",
-          "tty": "@node/tty",
-          "util": "@node/util"
-        }
-      },
-      "npm:inherits@2.0.1": {
-        "ignore": [
-          "test.js"
-        ]
-      },
-      "npm:inherits@2.0.3": {
-        "ignore": [
-          "test.js"
-        ]
-      },
-      "npm:ms@0.7.1": {
-        "jspmNodeConversion": false,
-        "format": "cjs"
-      }
-    }
+  "name": "todo",
+  "description": "MEAN Stack ToDo-app",
+  "version": "0.0.1",
+  "main": "app/server.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.10",
+    "mongoose": "^4.6.3",
+    "morgan": "^1.7.0",
+    "pug": "^2.0.0-beta6"
   },
   "devDependencies": {
     "eslint": "^3.7.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.3.0"
-  }
+    "eslint-plugin-react": "^6.3.0",
+    "pug-lint": "^2.3.0",
+    "pug-lint-config-dvpnt": "^1.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pepetopo/todo.git"
+  },
+  "keywords": [
+    "todo",
+    "mean"
+  ],
+  "author": "Elias Ylänen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pepetopo/todo/issues"
+  },
+  "homepage": "https://github.com/pepetopo/todo#readme"
 }
