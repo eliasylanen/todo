@@ -13,7 +13,8 @@ function findList(searchParam) {
 
 function insertUser(insertData) {
   const newUser = new schemas.User(insertData);
-  return newUser.save();
+  const newList = new schemas.List({ owner: insertData.username });
+  return Promise.all([newUser.save(), newList.save()]);
 }
 
 function insertListItem(insertData) {
@@ -29,6 +30,7 @@ function updateListItem(id, insertData) {
       owner: 'pepetopo',
     },
     { $set: {
+      'item.$.done': insertData.done,
       'item.$.content': insertData.content,
       'item.$.priority': insertData.priority,
     },

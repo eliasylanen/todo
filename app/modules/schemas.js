@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 const beautifyUnique = require('mongoose-beautiful-unique-validation');
 
-const userSchema = mongoose.Schema({
+/*
+ * User
+ */
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     lowercase: true,
@@ -17,11 +20,18 @@ const userSchema = mongoose.Schema({
     set: v => Buffer.from(v).toString('base64'),
   },
 });
-userSchema.plugin(beautifyUnique);
 
+userSchema.plugin(beautifyUnique);
 const User = mongoose.model('User', userSchema);
 
+/*
+ * List and ListItem
+ */
 const ListItem = new mongoose.Schema({
+  done: {
+    type: Boolean,
+    default: false,
+  },
   content: {
     type: String,
     required: true,
@@ -33,15 +43,19 @@ const ListItem = new mongoose.Schema({
   },
 });
 
-const List = mongoose.model('List', new mongoose.Schema({
+const listSchema = new mongoose.Schema({
   item: [ListItem],
   owner: {
     type: String,
     lowercase: true,
     ref: 'User',
     required: true,
+    unique: 'Only one list / user',
   },
-}));
+});
+
+listSchema.plugin(beautifyUnique);
+const List = mongoose.model('List', listSchema);
 
 module.exports = {
   User,
