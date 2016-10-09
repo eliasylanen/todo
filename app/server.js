@@ -1,9 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const dbTools = require('./modules/dbTools');
+const apiRouter = require('./modules/api');
 
 const app = express();
 const port = 8080 || process.env.PORT;
+
+mongoose.connect(dbTools.database);
 
 app
   .use(bodyParser.urlencoded({ extended: true }))
@@ -17,4 +22,8 @@ app
     res.render('index', { title: 'Hey', message: 'Hello there!' });
   })
 
-  .listen(port);
+  .use('/api', apiRouter)
+
+  .listen(port, () => {
+    console.log(`Listening in ${port}`);
+  });
