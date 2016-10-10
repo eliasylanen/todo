@@ -1,5 +1,6 @@
 const apiRouter = require('express').Router();
 const dbTools = require('./dbTools');
+const jwt = require('jsonwebtoken');
 
 function userGetter(req, res) {
   let searchParam = {};
@@ -23,6 +24,33 @@ apiRouter
   .get('/', (req, res) => {
     res.end('Nothing here');
   })
+
+/*
+ * Authorization
+ */
+.use((req, res, next) => {
+  const token = req.body.token ||
+                req.query.token ||
+                req.headers['x-access-token'];
+
+  if (token) {
+    jwt.verify(token, req.app.settings.superSecret, (err, decoded) => {
+      if (err) {
+        next({
+          success: false,
+          msg: 'Failed to authenticate token.',
+        });
+      }
+      req.decoded = decoded;
+      next();
+    });
+  } else {
+    next({
+      success: false,
+      msg: 'No token provided',
+    });
+  }
+})
 
 /*
  * User routes

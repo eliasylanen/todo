@@ -49,6 +49,7 @@ function deleteListItem(id) {
 }
 
 module.exports = {
+  schemas,
   database,
   findUser,
   findList,
