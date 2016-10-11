@@ -2,20 +2,8 @@ const apiRouter = require('express').Router();
 const dbTools = require('./dbTools');
 const jwt = require('jsonwebtoken');
 
-function userGetter(req, res) {
-  let searchParam = {};
-  if (req.params.id) searchParam = { _id: req.params.id };
-  dbTools.findUser(searchParam)
-    .then(users => { res.json({ success: true, msg: users }); })
-    .catch(err => { res.json({ success: false, msg: err }); });
-}
-
 function listGetter(req, res) {
-  // const searchParam = {};
-  // // if (req.params.user) {
-  // //   searchParam = { owner: req.params.user };
-  // // }
-  dbTools.findList({ owner: 'pepetopo' })
+  dbTools.findList({ owner: req.decoded })
     .then(lists => { res.json({ success: true, msg: lists }); })
     .catch(err => { res.json({ success: false, msg: err }); });
 }
@@ -42,6 +30,7 @@ apiRouter
         });
       }
       req.decoded = decoded;
+      console.log(decoded);
       next();
     });
   } else {
@@ -52,28 +41,11 @@ apiRouter
   }
 })
 
-/*
- * User routes
- */
-  // Get all users
-  .get('/users', userGetter)
-  // Get certain user by id
-  .get('/users/:user', userGetter)
-  // Insert new user
-  .post('/users', (req, res) => {
-    dbTools.insertUser(req.body)
-      .then(() => { res.json({ success: true }); })
-      .catch(err => { res.json({ success: false, msg: err }); });
-  })
-
-/*
- * List routes
- */
-  // Get all (user's) list items
+// Get all (user's) list items
   .get('/lists', listGetter)
   // Insert new list item
   .post('/lists', (req, res) => {
-    dbTools.insertListItem(req.body)
+    dbTools.insertListItem(req.body, req.decoded)
       .then((newItem) => {
         res.json({ success: true, msg: newItem });
       })
@@ -81,7 +53,7 @@ apiRouter
   })
   // Update list item by id
   .put('/lists/:id', (req, res) => {
-    dbTools.updateListItem(req.params.id, req.body)
+    dbTools.updateListItem(req.params.id, req.body, req.decoded)
     .then((editedItem) => {
       res.json({ success: true, msg: editedItem });
     })
@@ -89,7 +61,7 @@ apiRouter
   })
   // Delete list item
   .delete('/lists/:id', (req, res) => {
-    dbTools.deleteListItem(req.params.id, req.body)
+    dbTools.deleteListItem(req.params.id, req.decoded)
     .then((deletedItem) => {
       res.json({ success: true, msg: deletedItem });
     })

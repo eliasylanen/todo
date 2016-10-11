@@ -24,30 +24,37 @@ app
     res.render('index', { title: 'Hey', message: 'Hello there!' });
   })
 
-  .post('/register', (req, res) => {
-
+  .post('/login', (req, res, next) => {
+    const username = req.body.username.toLowerCase();
+    const password = Buffer.from(req.body.password).toString('base64');
+    dbTools.findUser({
+      username,
+    })
+      .then(user => {
+        if (!user) {
+          res.json({ success: false, msg: 'User not found' });
+        } else if (user) {
+          if (user.password !== password) {
+            res.json({ success: false, msg: 'Invalid login' });
+          } else {
+            const token = jwt.sign(
+            user.username,
+            req.app.settings.superSecret
+          );
+            res.json({
+              success: true,
+              message: token,
+            });
+          }
+        }
+      })
+      .catch(err => { console.log(err); next(err); });
   })
 
-  .post('/login', (req, res, next) => {
-    dbTools.User.findOne({ username: req.body.name }, (err, user) => {
-      if (err) next(err);
-      if (!user) {
-        res.json({ success: false, msg: 'User not found' });
-      } else if (user) {
-        if (user.password !== req.body.password) {
-          res.json({ success: false, msg: 'Invalid login' });
-        } else {
-          const token = jwt.sign(
-          user.name,
-          req.app.settings.superSecret
-        );
-          res.json({
-            success: true,
-            message: token,
-          });
-        }
-      }
-    });
+  .post('/register', (req, res) => {
+    dbTools.insertUser(req.body)
+      .then(() => { res.json({ success: true }); })
+      .catch(err => { res.json({ success: false, msg: err }); });
   })
 
   .use('/api', apiRouter)

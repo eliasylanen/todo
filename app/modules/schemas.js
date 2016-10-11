@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    lowercase: true,
     required: true,
     get: v => v,
     set: v => Buffer.from(v).toString('base64'),

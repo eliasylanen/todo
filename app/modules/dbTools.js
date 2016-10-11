@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const database = 'mongodb://dbuser:testpass@ds021356.mlab.com:21356/todolist';
 
 function findUser(searchParam) {
-  return schemas.User.find(searchParam, { username: 1 });
+  return schemas.User.findOne(searchParam);
 }
 
 function findList(searchParam) {
@@ -17,17 +17,18 @@ function insertUser(insertData) {
   return Promise.all([newUser.save(), newList.save()]);
 }
 
-function insertListItem(insertData) {
+function insertListItem(insertData, owner) {
+  console.log('hi');
   return schemas.List.update(
-    { owner: 'pepetopo' },
+    { owner },
     { $push: { item: insertData } });
 }
 
-function updateListItem(id, insertData) {
+function updateListItem(id, insertData, owner) {
   return schemas.List.update(
     {
       'item._id': new mongoose.Types.ObjectId(id),
-      owner: 'pepetopo',
+      owner,
     },
     { $set: {
       'item.$.done': insertData.done,
@@ -37,9 +38,9 @@ function updateListItem(id, insertData) {
   });
 }
 
-function deleteListItem(id) {
+function deleteListItem(id, owner) {
   return schemas.List.update(
-    { owner: 'pepetopo' },
+    { owner },
     {
       $pull: {
         item: { _id: new mongoose.Types.ObjectId(id) },
