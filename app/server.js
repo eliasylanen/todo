@@ -15,21 +15,21 @@ app
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use(morgan('dev'))
+  .use(express.static('app/client/src'))
+  .use(express.static('app/client/style'))
 
   .set('views', './app/client')
   .set('view engine', 'pug')
   .set('superSecret', 'todoSecret')
 
   .get('/', (req, res) => {
-    res.render('index', { title: 'Hey', message: 'Hello there!' });
+    res.render('index');
   })
 
   .post('/login', (req, res, next) => {
     const username = req.body.username.toLowerCase();
     const password = Buffer.from(req.body.password).toString('base64');
-    dbTools.findUser({
-      username,
-    })
+    dbTools.findUser({ username })
       .then(user => {
         if (!user) {
           res.json({ success: false, msg: 'User not found' });

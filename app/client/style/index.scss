@@ -1,0 +1,52 @@
+$bgColor: rgb(245, 245, 245);
+
+body {
+  background-color: $bgColor;
+
+  .col {
+    padding: 0 !important;
+  }
+
+  #remember {
+    position: static !important;
+    opacity: 1 !important;
+    vertical-align: middle;
+  }
+
+  #splash {
+    position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+    #loginSplash {
+      position: relative;
+        top: 3vh;
+      background-color: $bgColor;
+      display: block;
+      width: 100%;
+      max-width: 20rem;
+      margin: auto;
+      box-sizing: border-box;
+      text-align: center;
+
+      .tabs {
+        background-color: inherit;
+      }
+
+      .btn {
+        display: block;
+        margin: 1rem auto;
+      }
+
+      .progress {
+        display: none;
+      }
+    }
+  }
+
+  main {
+    display: none;
+  }
+}
