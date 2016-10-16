@@ -27,6 +27,7 @@ app
   })
 
   .post('/login', (req, res, next) => {
+    console.log(req.body);
     const username = req.body.username.toLowerCase();
     const password = Buffer.from(req.body.password).toString('base64');
     dbTools.findUser({ username })
@@ -43,7 +44,7 @@ app
           );
             res.json({
               success: true,
-              message: token,
+              msg: token,
             });
           }
         }
@@ -53,7 +54,7 @@ app
 
   .post('/register', (req, res) => {
     dbTools.insertUser(req.body)
-      .then(() => { res.json({ success: true }); })
+      .then(() => { res.json({ success: true, msg: 'Succesfully registered' }); })
       .catch(err => { res.json({ success: false, msg: err }); });
   })
 
