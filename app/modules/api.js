@@ -17,6 +17,7 @@ apiRouter
  * Authorization
  */
 .use((req, res, next) => {
+  console.log(req.headers);
   const token = req.body.token ||
                 req.query.token ||
                 req.headers['x-access-token'];
@@ -26,7 +27,7 @@ apiRouter
       if (err) {
         next({
           success: false,
-          msg: 'Failed to authenticate token.',
+          msg: 'Failed to authenticate token',
         });
       }
       req.decoded = decoded;

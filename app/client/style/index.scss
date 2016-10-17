@@ -7,12 +7,6 @@ body {
     padding: 0 !important;
   }
 
-  #remember {
-    position: static !important;
-    opacity: 1 !important;
-    vertical-align: middle;
-  }
-
   #splash {
     position: absolute;
       top: 0;
@@ -35,6 +29,12 @@ body {
         background-color: inherit;
       }
 
+      #remember {
+        position: static !important;
+        opacity: 1 !important;
+        vertical-align: middle;
+      }
+
       .btn {
         display: block;
         margin: 1rem auto;
@@ -44,6 +44,11 @@ body {
         display: none;
       }
     }
+  }
+
+  .preloader-wrapper {
+    display: none;
+    margin: 10% auto;
   }
 
   main {
