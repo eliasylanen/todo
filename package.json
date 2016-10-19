@@ -1,7 +1,7 @@
 {
   "name": "todo",
   "description": "MEAN Stack ToDo-app",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "main": "app/server.js",
   "dependencies": {
     "body-parser": "^1.15.2",
