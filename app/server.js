@@ -15,16 +15,11 @@ app
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use(morgan('dev'))
-  .use(express.static('app/client/src'))
-  .use(express.static('app/client/style'))
+  .use(express.static('app/client/'))
 
   .set('views', './app/client')
   .set('view engine', 'pug')
   .set('superSecret', 'todoSecret')
-
-  .get('/', (req, res) => {
-    res.render('index');
-  })
 
   .post('/login', (req, res, next) => {
     console.log(req.body);
