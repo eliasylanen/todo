@@ -12,20 +12,22 @@
         </ul>
       </div>
     </div>
-    <div id="login" class="col s12">
+    <form id="login" class="col s12">
       <label for="loginUsername">User name:</label>
       <input type="text" id="loginUsername" data-ng-model="user.loginUsername">
       <label for="loginPassword">Password:</label>
       <input type="password" id="loginPassword" data-ng-model="user.loginPassword">
       <label for="remember">Remember me: &emsp;</label>
-      <input type="checkbox" id="remember" data-ng-model="user.remember"><a id="loginBtn" data-ng-click="user.access('login')" class="waves-effect waves-light btn">Log in</a>
-    </div>
-    <div id="register" class="col s12">
+      <input type="checkbox" id="remember" data-ng-model="user.remember">
+      <button type="submit" id="loginBtn" data-ng-click="user.access('login')" class="waves-effect waves-light btn">Log in</button>
+    </form>
+    <form id="register" class="col s12">
       <label for="registerUsername">User name:</label>
       <input type="text" id="registerUsername" data-ng-model="user.registerUsername">
       <label for="registerPassword">Password:</label>
-      <input type="password" id="registerPassword" data-ng-model="user.registerPassword"><a id="registerBtn" data-ng-click="user.access('register')" class="waves-effect waves-light btn">Register</a>
-    </div>
+      <input type="password" id="registerPassword" data-ng-model="user.registerPassword">
+      <button type="submit" id="registerBtn" data-ng-click="user.access('register')" class="waves-effect waves-light btn">Register</button>
+    </form>
     <div data-ng-if="user.clicked" class="progress">
       <div class="indeterminate"></div>
     </div>

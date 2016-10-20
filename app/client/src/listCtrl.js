@@ -10,6 +10,7 @@ function listCtrl(appFactory) {
   vm.listItems = null;
 
   vm.init = init;
+  vm.logout = logout;
 
   function init() {
     if (!vm.token) window.location.replace('/');
@@ -18,5 +19,12 @@ function listCtrl(appFactory) {
         vm.listItems = data.data.msg[0].item;
       })
       .catch(err => { alert(err); });
+    $('.button-collapse').sideNav();
+  }
+
+  function logout() {
+    localStorage.removeItem('todoToken');
+    sessionStorage.removeItem('todoToken');
+    window.location.replace('/');
   }
 }
