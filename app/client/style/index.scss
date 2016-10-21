@@ -2,9 +2,18 @@ $bgColor: rgb(245, 245, 245);
 
 body {
   background-color: $bgColor;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 
-  .col {
+.col {
     padding: 0 !important;
+  }
+
+  input[type="checkbox"] {
+    position: static !important;
+    opacity: 1 !important;
+    vertical-align: middle;
   }
 
   #splash {
@@ -28,12 +37,6 @@ body {
         background-color: inherit;
       }
 
-      #remember {
-        position: static !important;
-        opacity: 1 !important;
-        vertical-align: middle;
-      }
-
       .btn {
         display: block;
         width: 100%;
@@ -43,15 +46,47 @@ body {
   }
 
   main {
-    .card-content {
-      display: table;
+    flex: 1 0 auto;
 
-      .headerRow, .contentRow {
-        display: table-row;
+    .brand-logo {
+      padding: 0 .5rem;
+    }
 
-        h5, p {
-          display: table-cell;
-          padding: 4%;
+    #addEdit {
+      font-size: 1.5rem;
+      display: none;
+      background-color: white;
+      z-index: 999;
+      position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      padding: 1rem;
+      border-bottom: 2px solid cyan;
+    }
+
+    #content {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+
+      .col {
+        flex: auto;
+        margin: .5rem;
+      }
+
+      .card-content {
+        display: table;
+        width: 100%;
+
+        .headerRow, .contentRow {
+          display: table-row;
+
+          h5, p {
+            display: table-cell;
+            padding: .5rem;
+            font-size: 1em;
+          }
         }
       }
     }
